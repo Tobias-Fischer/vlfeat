@@ -360,12 +360,12 @@ mexcrt =
 
 !ifdef MATLABROOT
 all: $(bindir) $(objdir) $(mexdir) \
-     $(bincrt) $(bindir)\vl.lib $(bindir)\vl.dll \
+     $(bindir)\vl.lib $(bindir)\vl.dll \
      $(cmdexe) \
      $(mexcrt) $(mexdir)\vl.dll $(mexdll)
 !else
 all: $(bindir) $(objdir) \
-     $(bincrt) $(bindir)\vl.lib $(bindir)\vl.dll \
+     $(bindir)\vl.lib $(bindir)\vl.dll \
      $(cmdexe)
 !endif
 
@@ -414,7 +414,6 @@ info:
 	@echo ** MSVCROOT    = $(MSVCROOT)
 	@echo ** MSVCR       = $(MSVCR)
 	@echo ** MSVCR_PATH  = $(MSVCR_PATH)
-	@echo ** bincrt      = $(bincrt)
 	@echo ** mexcrt      = $(mexcrt)
 	@echo ** WINSDKROOT  = $(WINSDKROOT)
 	@echo ** DEBUG       = $(DEBUG)
@@ -462,13 +461,6 @@ $(bindir)\vl.dll : $(libobj)
 $(bindir)\vl.lib : $(libobj)
 	@echo ... LIB $(@R).lib
 	@lib $(**) /OUT:"$(@)" /NOLOGO
-
-# redistributable: msvcr__.dll => bin/win{32,64}/msvcr__.dll
-$(bindir)\$(MSVCR).manifest : "$(MSVCR_PATH)\$(MSVCR).manifest"
-        copy $(**) "$(@)"
-
-$(bindir)\msvcr$(MSVSVER).dll: "$(MSVCR_PATH)\msvcr$(MSVSVER).dll"
-        copy $(**) "$(@)"
 
 # --------------------------------------------------------------------
 #                                Rules to compile the VLFeat EXE files
