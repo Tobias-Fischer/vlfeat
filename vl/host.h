@@ -658,10 +658,5 @@ vl_swap_host_big_endianness_2 (void *dst, void* src)
 #endif
 }
 
-/* Linux: limit glibc to old versions for compatibility */
-#if defined(VL_COMPILER_GNUC) & defined(VL_OS_LINUX) & ! defined(__DOXYGEN__)
-__asm__(".symver memcpy,memcpy@GLIBC_2.2.5");
-#endif
-
 /* VL_HOST_H */
 #endif
