@@ -919,7 +919,9 @@ vl_configuration_to_string_copy ()
   }
 
   if (staticString) vl_free(staticString) ;
-  if (cpuString) vl_free(cpuString) ;
+#if defined(VL_ARCH_IX86) || defined(VL_ARCH_X64) || defined(VL_ARCH_IA64)
+  if (cpuString) vl_free(cpuString);
+#endif
   return string ;
 }
 
